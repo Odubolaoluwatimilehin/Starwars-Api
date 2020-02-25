@@ -1,8 +1,10 @@
 
 const starwars = require('../api/starwars');
 const Movie = require('../model/movieModel');
+const Comment = require('../model/commentModel');
 
-exports.fetchMovie =  async (req,res) => {
+
+exports.getMovies =  async (req,res) => {
  try {
 
    const movie = await starwars.get('/');
@@ -28,7 +30,7 @@ exports.fetchMovie =  async (req,res) => {
       newMovie = Movie.create(newMovie);   
     });
 
-    const movieList =  await Movie.find();
+    const movieList =  await Movie.find().populate("Comment");
      
      res.status(200).json({
          status: 'ok',
@@ -36,6 +38,43 @@ exports.fetchMovie =  async (req,res) => {
      });
 
    } catch (err){
+      console.log(err);
+   }
+
+}
+
+exports.getMovie = async (req, res) => {
+   try {
+      const movie = await Movie.findById({ _id: req.params.id });
+
+      res.status(200).json({
+         status: 'ok',
+         data: movie
+     });
+
+   }
+   catch (err){
+      console.log(err);
+   }
+}
+
+exports.addComment = async (req,res) => {
+   try {
+      const newComment = await Comment.create({comment:req.body.comment});
+      let commentMovie;
+      if(newComment){
+         commentMovie =  await Movie.findByIdAndUpdate({ _id: req.params.id },{comment:newComment._id },{
+            new: true,
+        });
+      }
+
+      res.status(200).json({
+         status: 'ok',
+         data:commentMovie
+     });
+    
+   }
+   catch (err){
       console.log(err);
    }
 
