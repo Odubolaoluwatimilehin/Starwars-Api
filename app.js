@@ -30,7 +30,7 @@ res.status(400).json({
       status:'Not Found',
       message: "URL not found"
     }) 
-  })
+})
   
 
 
