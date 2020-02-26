@@ -16,11 +16,11 @@ exports.getMovies =  async (req,res) => {
        opening_crawl: item.opening_crawl,
        created: item.created
     }
-   
-    
+
       newMovie = Movie.create(newMovie);   
     });
 
+   
      movieList =  await Movie.find().sort({'created': 'asc'}).populate("comment");
      
      res.status(200).json({
@@ -51,7 +51,7 @@ exports.getMovie = async (req, res) => {
    catch (err){
       res.status(400).json({
          status: 'Could Not get movie',
-         message: err
+         message: err.message
      }) 
    }
 }
