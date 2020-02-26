@@ -40,5 +40,5 @@ res.status(400).json({
   
 
 
-const port = process.env.PORT;
-app.listen(port , '127.0.0.1', () => console.log('App running on port' + port));
+const port = process.env.PORT || 3000;
+app.listen(port , () => console.log('App running on port' + port));
