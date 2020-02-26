@@ -18,7 +18,8 @@ exports.getMovies =  async (req,res) => {
     }
    
     let isAvail = await Movie.findOne({title: newMovie.title});
-   
+    
+   //let movieList;
     if(isAvail) {
       return (
          res.status(200).json({
@@ -30,7 +31,7 @@ exports.getMovies =  async (req,res) => {
       newMovie = Movie.create(newMovie);   
     });
 
-    const movieList =  await Movie.find().populate("Comment");
+     movieList =  await Movie.find().sort({'created': 'asc'}).populate("comment");
      
      res.status(200).json({
          status: 'ok',
@@ -38,14 +39,18 @@ exports.getMovies =  async (req,res) => {
      });
 
    } catch (err){
-      console.log(err);
+      res.status(400).json({
+         status: 'Could Not get movies',
+         message: err
+     }) 
    }
 
 }
 
 exports.getMovie = async (req, res) => {
    try {
-      const movie = await Movie.findById({ _id: req.params.id });
+      const movie = await Movie.findById({ _id: req.params.id }).populate("comment");
+      
 
       res.status(200).json({
          status: 'ok',
@@ -54,14 +59,17 @@ exports.getMovie = async (req, res) => {
 
    }
    catch (err){
-      console.log(err);
+      res.status(400).json({
+         status: 'Could Not get movie',
+         message: err
+     }) 
    }
 }
 
 exports.addComment = async (req,res) => {
    try {
       const newComment = await Comment.create({comment:req.body.comment});
-      let commentMovie;
+      
       if(newComment){
          commentMovie =  await Movie.findByIdAndUpdate({ _id: req.params.id },{comment:newComment._id },{
             new: true,
@@ -70,13 +78,33 @@ exports.addComment = async (req,res) => {
 
       res.status(200).json({
          status: 'ok',
-         data:commentMovie
+         data:newComment
      });
     
    }
    catch (err){
-      console.log(err);
+      res.status(400).json({
+         status: 'Could not add Comment',
+         message: err
+     }) 
    }
 
+}
+
+
+
+exports.deleteComment = async (req,res) => {
+   try {
+      await Comment.where(req.params.id).findOneAndDelete(true);
+      res.status(201).json({
+         status: 'ok',
+         message: 'Record Deleted'
+     })
+ } catch (err){
+      res.status(400).json({
+          status: 'Delete failed ',
+          message: err
+      }) 
+ }
 }
 

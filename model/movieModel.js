@@ -20,12 +20,6 @@ const movieSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "Comment"
     },
-    // },
-    // conmentNumber: {
-    //     type: Number,
-    //     required: true,
-    //     deafult: 0
-    //   },
     created: {
         type: Date,
       
