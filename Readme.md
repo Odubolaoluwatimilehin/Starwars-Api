@@ -106,7 +106,7 @@ would return response of a specific movie.
 
 ```
 
-#### To get endpoints of API check api documentation provided in the Documentation.md file on the repo.
+#### To get endpoints of API check api documentation provided in the [Documentation.md](https://github.com/Odubolaoluwatimilehin/Starwars-Api/blob/master/Documentation.md) file on the repo.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

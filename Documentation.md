@@ -10,10 +10,9 @@ BaseURl: https://starwars-2020.herokuapp.com/api/movie/
 
 **Endpoints**
 
- **GET**    / -- Get all the film resources
-**GET**     /:id -- Get a specific film resource
-**POST**    /:id  -- Add a comment
-**DELETE**  /:id -- Delete a comment
+**GET**     /:id -- Get a specific film resource<br> 
+**POST**    /:id  -- Add a comment<br> 
+**DELETE**  /:id -- Delete a comment<br> 
 
 
 
@@ -118,5 +117,5 @@ errors
 
 ### The following was not implemented
 - Character list requirements.
-- public IP address of the commenter
+- Public IP address of the commenter was not added.
 
