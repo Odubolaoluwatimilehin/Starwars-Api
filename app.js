@@ -3,14 +3,14 @@
 const express = require('express');
 const app = new express();
 const dotenv = require('dotenv');
-dotenv.config({ path: './config.env'});
+dotenv.config({ path: './.env'});
 const  movieRouter = require('./routes/movieRoutes');
 const bodyParser = require('body-parser');
 
 //connect to db
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false', {useNewUrlParser: true, useUnifiedTopology: true}).then(
+mongoose.connect(process.env.DATABASE, {useNewUrlParser: true, useUnifiedTopology: true}).then(
     console.log('DB connection is successful!')
     );;
 
