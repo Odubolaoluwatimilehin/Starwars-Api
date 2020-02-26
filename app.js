@@ -25,5 +25,5 @@ app.use(express.json());
 app.use('/api/movie', movieRouter);
 
 
-const port = 3001;
+const port = process.env.PORT;
 app.listen(port , '127.0.0.1', () => console.log('App running on port' + port));
