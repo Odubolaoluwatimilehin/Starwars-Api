@@ -10,6 +10,7 @@ BaseURl: https://starwars-2020.herokuapp.com/api/movie/
 
 **Endpoints**
 
+**GET**     / -- Get a all film resource<br> 
 **GET**     /:id -- Get a specific film resource<br> 
 **POST**    /:id  -- Add a comment<br> 
 **DELETE**  /:id -- Delete a comment<br> 
