@@ -25,5 +25,14 @@ app.use(express.json());
 app.use('/api/movie', movieRouter);
 
 
+app.all('*', (req,res) => {
+res.status(400).json({
+      status:'Not Found',
+      message: "URL not found"
+    }) 
+  })
+  
+
+
 const port = process.env.PORT;
 app.listen(port , '127.0.0.1', () => console.log('App running on port' + port));
