@@ -17,17 +17,7 @@ exports.getMovies =  async (req,res) => {
        created: item.created
     }
    
-    let isAvail = await Movie.findOne({title: newMovie.title});
     
-   //let movieList;
-    if(isAvail) {
-      return (
-         res.status(200).json({
-            status: 'ok',
-            data: movieList
-        })
-      );
-    }
       newMovie = Movie.create(newMovie);   
     });
 

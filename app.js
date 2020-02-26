@@ -10,7 +10,10 @@ const bodyParser = require('body-parser');
 //connect to db
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DATABASE, {useNewUrlParser: true, useUnifiedTopology: true}).then(
+mongoose.connect(process.env.DATABASE, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true}).then(
     console.log('DB connection is successful!')
     );;
 
@@ -22,6 +25,9 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 //routes
+app.get('/', (req, res) => {
+    res.send('API is live')
+})
 app.use('/api/movie', movieRouter);
 
 
