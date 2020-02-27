@@ -16,10 +16,10 @@ const movieSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    comment: {
+    comment: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
-    },
+    }],
     created: {
         type: Date,
       

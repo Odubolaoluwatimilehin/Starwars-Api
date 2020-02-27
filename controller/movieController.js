@@ -58,18 +58,29 @@ exports.getMovie = async (req, res) => {
 
 exports.addComment = async (req,res) => {
    try {
-      const newComment = await Comment.create({comment:req.body.comment});
+     
+         const comment = new Comment({comment:req.body.comment});
+         comment
+           .save()
+           .then(comment => {
+             return Movie.findById(req.params.id);
+           })
+           .then(Movie => {
+             Movie.comment.unshift(comment);
+             return Movie.save();
+           })
+           .then(Movie => {
+            res.status(200).json({
+               status: 'ok',
+                data:comment
+            });
+           })
+           .catch(err => {
+             console.log(err);
+           });
+     
+     
       
-      if(newComment){
-         commentMovie =  await Movie.findByIdAndUpdate({ _id: req.params.id },{comment:newComment._id },{
-            new: true,
-        });
-      }
-
-      res.status(200).json({
-         status: 'ok',
-         data:newComment
-     });
     
    }
    catch (err){
